@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>מגרש אימון</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<div id="app">
+  <canvas id="c"></canvas>
+  <div id="vig"></div>
+  <div id="under"></div>
+
+  <div id="hud" hidden>
+    <div id="squad" class="hud"></div>
+    <canvas id="minimap" class="hud" width="176" height="176"></canvas>
+    <div id="brinfo" class="hud glass"></div>
+    <div id="feed" class="hud"></div>
+    <div id="sense" class="hud"></div>
+    <div id="stormfx" class="hud"></div>
+    <div id="hiddenTag" class="hud glass">מוסתר · מתאושש לאט</div>
+    <div id="stats" class="hud glass"></div>
+    <div id="cross" class="hud"><i></i><i></i><i></i><i></i><b></b></div>
+    <div id="hitm" class="hud"><i></i><i></i><i></i><i></i></div>
+    <div id="scope" class="hud"></div>
+    <div id="flash" class="hud"></div>
+    <div id="edit" class="hud"></div>
+    <div id="editcur" class="hud"></div>
+    <div id="toast" class="hud glass"></div>
+    <div id="prompt" class="hud glass"></div>
+    <div id="progL" class="hud"></div>
+    <div id="prog" class="hud"><div></div></div>
+    <div id="mats" class="hud"></div>
+    <div id="keys" class="hud glass"></div>
+    <div id="bottom" class="hud">
+      <div id="buildbar"></div>
+      <div id="vitals">
+        <div class="bar" id="shBar"><div></div><span></span></div>
+        <div class="bar" id="hpBar"><div></div><span></span></div>
+      </div>
+      <div id="hotbar"></div>
+      <div id="ammo"></div>
+    </div>
+    <div id="tags"></div>
+    <div id="nums"></div>
+    <div id="death">
+      <h2 id="deathT">נפלת</h2>
+      <p id="deathS"></p>
+      <button class="go" id="respawn">חזרה לזירה</button>
+    </div>
+  </div>
+
+  <div id="menu">
+    <div class="card" dir="rtl">
+      <div class="hero"><h1>מגרש אימון</h1><p>בנייה, עריכה, קרב וצניחה. הכול כדי להתאמן על הידיים.</p></div>
+      <div class="modes">
+        <button id="mTrain" class="mode"><b>אימון חופשי</b><span>מגרש פתוח עם סקוואד, אויבים, תיבות ובתים. אפשר לבנות ולערוך בלי הגבלה.</span></button>
+        <button id="mBR" class="mode"><b>באטל רויאל · 50 שחקנים</b><span>צניחה מהאוויר, מפה גדולה, סופה מתכווצת ובוטים שנלחמים גם ביניהם.</span></button>
+      </div>
+      <div class="tabs"><button data-tab="set" class="on">הגדרות</button><button data-tab="keys">מקשים</button><button data-tab="how">איך משחקים</button></div>
+      <div class="pane on" id="pane-set">
+        <div class="cols">
+          <div>
+            <h3>דמות</h3>
+            <div class="row2"><span>תלבושת</span><div id="outfits"></div></div>
+            <h3>תצוגה</h3>
+            <div class="row2"><label for="sQual">איכות גרפיקה</label><select id="sQual"><option value="0">נמוכה (מהירה)</option><option value="1">בינונית</option><option value="2">גבוהה</option></select></div>
+            <div class="row2"><label for="sFov">שדה ראייה</label><input id="sFov" type="range" min="60" max="110" step="1"><b id="sFovV"></b></div>
+            <div class="row2"><label for="sSens">רגישות עכבר</label><input id="sSens" type="range" min="0.3" max="3" step="0.05"></div>
+            <div class="row2"><label for="sKeys">הצג לוח מקשים על המסך</label><input id="sKeys" type="checkbox"></div>
+            <div class="row2"><label for="sSnd">צלילים</label><input id="sSnd" type="checkbox"></div>
+          </div>
+          <div>
+            <h3>אימון חופשי</h3>
+            <div class="row2"><label for="sEn">מספר אויבים</label><input id="sEn" type="range" min="0" max="6" step="1"><b id="sEnV"></b></div>
+            <div class="row2"><label for="sEnF">האויבים יורים</label><input id="sEnF" type="checkbox"></div>
+            <div class="row2"><label for="sSq">סקוואד (3 חברים)</label><input id="sSq" type="checkbox"></div>
+            <h3>בנייה</h3>
+            <div class="row2"><label for="sInf">חומרי בנייה אינסופיים</label><input id="sInf" type="checkbox"></div>
+            <div class="row2"><label for="sTurbo">בנייה רציפה בלחיצה ארוכה</label><input id="sTurbo" type="checkbox"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pane" id="pane-keys">
+        <div class="cols"><div id="bindsA"></div><div id="bindsB"></div></div>
+      </div>
+      <div class="pane" id="pane-how">
+        <div class="how">
+          <h3>קרב</h3>
+          <div><kbd>לחצן שמאלי</kbd> יורה, בונה, מכה במכוש או זורק רימון</div><div><kbd>לחצן ימני</kbd> מכוון. בצלפית נפתח טווח.</div>
+          <div>ירי לראש גורם יותר נזק</div><div>במחסנית יש 300 כדורים, אז כמעט לא צריך לטעון</div>
+          <h3>בנייה</h3>
+          <div>בוחרים קיר, רצפה, מדרגות או גג ולוחצים להצבה. החזקת הלחצן בונה ברצף.</div><div>החזק את מקש העריכה על מבנה שלך, סמן משבצות ושחרר כדי לאשר.</div>
+          <div>מבט למעלה בעת הצבת רצפה מציב אותה מעל הראש</div><div>המכוש אוסף חומרים מעצים, מאבנים ומהמבנים</div>
+          <h3>ציוד</h3>
+          <div>תיבה נפתחת בהחזקת מקש הפעולה</div><div>לחיצה קצרה אוספת לחריץ פנוי, החזקה מחליפה את החריץ הנבחר</div>
+          <h3>באטל רויאל</h3>
+          <div>בצניחה לוחצים על מקש הקפיצה כדי לפתוח מצנח, וגם הוא נפתח לבד קרוב לקרקע</div><div>חיצים סביב הכוונת מצביעים על אויב שמתקרב או יורה</div>
+          <div>שיח או בית מסתירים אותך כשאתה עומד במקום</div><div>הסופה מתכווצת. הישאר בתוך העיגול הלבן במפה.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="go" id="start">התחל</button>
+        <button id="bReset">אפס מקשים</button>
+        <button id="bWorld">אפס בניות</button>
+        <button id="bChests">תיבות חדשות</button>
+      </div>
+      <div class="note" id="lockNote">אם הדפדפן לא נועל את העכבר, אפשר להסתכל עם חיצי המקלדת או בגרירת הכפתור הימני.</div>
+    </div>
+  </div>
+  <div id="nowebgl">הדפדפן לא תומך בתלת-ממד (WebGL). נסה דפדפן אחר או עדכן דרייבר של כרטיס המסך.</div>
+  <div id="small">המשחק מיועד למחשב עם מקלדת ועכבר. פתח אותו במסך גדול יותר.</div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="dist/game.js"></script>
+</body>
+</html>

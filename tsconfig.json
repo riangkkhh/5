@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "strict": false,
+    "noImplicitAny": false,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "newLine": "lf",
+    "module": "esnext",
+    "moduleDetection": "legacy",
+    "rootDir": "src",
+    "outDir": "dist/js",
+    "types": []
+  },
+  "files": [
+    "src/types.d.ts",
+    "src/00_settings.ts",
+    "src/01_renderer.ts",
+    "src/02_terrain.ts",
+    "src/03_building.ts",
+    "src/04_world.ts",
+    "src/05_houses.ts",
+    "src/06_scenery.ts",
+    "src/07_weapons.ts",
+    "src/08_avatar.ts",
+    "src/09_entities.ts",
+    "src/10_physics.ts",
+    "src/11_effects.ts",
+    "src/12_audio.ts",
+    "src/13_state.ts",
+    "src/14_inventory.ts",
+    "src/15_loot.ts",
+    "src/16_combat.ts",
+    "src/17_buildsys.ts",
+    "src/18_botsai.ts",
+    "src/19_royale.ts",
+    "src/20_hud.ts",
+    "src/21_menu.ts",
+    "src/22_events.ts",
+    "src/22a_post.ts",
+    "src/23_main.ts"
+  ]
+}

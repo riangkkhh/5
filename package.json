@@ -1,0 +1,1 @@
+{"name":"arena-training","private":true,"version":"1.0.0","scripts":{"build":"tsc -p . && python3 build.py"},"devDependencies":{"typescript":"^5.4.0"}}
